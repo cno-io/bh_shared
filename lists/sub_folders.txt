@@ -1,0 +1,8 @@
+.aws/
+.elasticbeanstalk/
+.ssh/
+.azure/
+.git/
+.svn/
+%3f/
+%ff/
