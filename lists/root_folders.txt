@@ -5,4 +5,5 @@
 /home/centos/
 /etc/
 /config/
+/var/task/
 ~/
