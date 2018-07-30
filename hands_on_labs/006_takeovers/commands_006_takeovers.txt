@@ -1,0 +1,7 @@
+cnoio_subjack -h
+
+cnoio_subjack -w /shared/all_subdomains.txt -o /shared/subjack_results.txt
+
+cat /shared/subjack_results.txt
+
+nslookup staff.lizardblue.com
