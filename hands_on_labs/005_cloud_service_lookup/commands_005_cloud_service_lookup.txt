@@ -1,0 +1,23 @@
+ping -c3 lizardblue.com
+
+cnoio_nimbusland 34.209.82.230
+
+ping -c3 cdn2.lizardblue.com
+
+dig cdn2.lizardblue.com
+
+dig -x 52.219.88.26
+
+nslookup cdn2.lizardblue.com
+
+cd /shared/
+ 
+cat /shared/lookups/nslookups.sh
+
+/shared/lookups/nslookups.sh /shared/all_subdomains.txt /shared/results_nslookups.txt
+
+tail /shared/results_nslookups.txt
+
+grep "s3" /shared/results_nslookups.txt
+ 
+grep "us-" /shared/results_nslookups.txt
