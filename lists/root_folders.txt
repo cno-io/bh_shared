@@ -1,0 +1,8 @@
+/
+/root/
+/home/ec2-user/
+/home/ubuntu/
+/home/centos/
+/etc/
+/config/
+~/
