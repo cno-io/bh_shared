@@ -1,0 +1,65 @@
+import boto3 # import the boto3 library
+
+ec2 = boto3.client("ec2")
+
+regions = ec2.describe_regions()
+
+regions = [r['RegionName'] for r in regions['Regions']]
+
+for r in regions:
+
+
+~~~ 001_enumerate_regions.py ~~~
+
+import boto3
+ec2 = boto3.client("ec2")
+regions = ec2.describe_regions()
+regions = [r['RegionName'] for r in regions['Regions']]
+for r in regions:
+    print r
+
+~~~ ### ~~~
+
+ssmClient = boto3.client("ssm", r)
+
+params = ssmClient.describe_parameters()
+
+for p in params['Parameters']:
+    p_name = p['Name']
+    response = ssmClient.get_parameter(
+        Name=p_name)
+    val = response['Parameter']['Value']
+    print "%s - %s" % (p_name, val)
+
+~~~ 002_enumerate_ssm_in_a_region.py ~~~
+
+ssmClient = boto3.client("ssm", 'us-east-1')
+
+params = ssmClient.describe_parameters()
+
+for p in params['Parameters']:
+    p_name = p['Name']
+    response = ssmClient.get_parameter(
+        Name=p_name)
+    val = response['Parameter']['Value']
+    print "%s - %s" % (p_name, val)
+
+~~~ ### ~~~
+
+~~~ 003_enumerate_ssm_in_each_region.py ~~~
+
+import boto3
+ec2 = boto3.client("ec2")
+regions = ec2.describe_regions()
+regions = [r['RegionName'] for r in regions['Regions']]
+for r in regions:
+    ssmClient = boto3.client("ssm", r)
+    params = ssmClient.describe_parameters()
+    for p in params['Parameters']:
+        p_name = p['Name']
+        response = ssmClient.get_parameter(
+            Name=p_name)
+        val = response['Parameter']['Value']
+        print "%s - %s" % (p_name, val)
+
+~~~ ### ~~~
