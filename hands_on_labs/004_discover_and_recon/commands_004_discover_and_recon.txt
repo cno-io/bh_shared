@@ -1,0 +1,64 @@
+~~~ Discover via OSINT ~~~
+
+cnoio_amass -d lizardblue.com
+
+cnoio_amass -v -ip -d lizardblue.com
+
+cnoio_amass -v -ip -brute -w /shared/lists/namelist.txt -min-for-recursive 3 -d lizardblue.com
+
+cnoio_amass -o /shared/results_subdomains_amass.txt -d lizardblue.com
+
+cat /shared/results_subdomains_amass.txt.txt
+
+
+~~~ Recon via DNS Bruteforce ~~~
+
+cnoio_gobuster
+
+head /shared/lists/subdomains-top1mil-5000.txt
+
+tail /shared/lists/subdomains-top1mil-5000.txt 
+
+cnoio_gobuster -t 100 -i -m dns -w /shared/lists/subdomains-top1mil-5000.txt -u lizardblue.com -o /shared/raw_results_subdomains_gobuster.txt
+
+cat /shared/raw_results_subdomains_gobuster.txt
+
+cat /shared/raw_results_subdomains_gobuster.txt | cut -d "[" -f 2 | cut -d "]" -f 1 > /shared/results_ips_gobuster.txt
+
+cat /shared/results_ips_gobuster.txt
+
+cat /shared/raw_results_subdomains_gobuster.txt | cut -d " " -f 2 | tr '[:upper:]' '[:lower:]' | sort -u > /shared/results_subdomains_gobuster.txt
+
+cat /shared/results_subdomains_gobuster.txt
+
+
+~~~ Recon via Web Crawling ~~~
+
+cd /shared/spider/
+
+wget -r --span-hosts --spider -D lizardblue.com -o /shared/spider/spider.log http://lizardblue.com
+
+ls -alF /shared/spider/
+
+head /shared/spider/spider.log
+
+grep "\-\-2018" /shared/spider/spider.log
+
+grep "\-\-2018" /shared/spider/spider.log | grep -v "FINISHED"
+
+grep "\-\-2018" /shared/spider/spider.log | grep -v "FINISHED" | cut -d '/' -f 3
+
+grep "\-\-2018" /shared/spider/spider.log | grep -v "FINISHED" | cut -d '/' -f 3 | sort -u
+
+grep "\-\-2018" /shared/spider/spider.log | grep -v "FINISHED" | cut -d '/' -f 3 | sort -u > /shared/results_subdomains_spider.txt
+
+cat /shared/results_subdomains_spider.txt
+
+
+~~~ Combining the Results ~~~
+
+cd /shared
+
+cat /shared/results_subdomains_*.txt | sort -u >> /shared/all_subdomains.txt
+
+cat /shared/all_subdomains.txt
