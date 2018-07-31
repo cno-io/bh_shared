@@ -46,3 +46,13 @@ function cnoio_lolurslove() {
 function cnoio_aws_inventory() {
     docker run -v /shared:/shared -v /root/.aws:/root/.aws -v /root/.principalmap:/root/.principalmap cnoio/aws_inventory $@
 }
+
+function cnoio_wfuzz() {
+    docker run -v /shared:/shared -v /root/.aws:/root/.aws -v /root/.principalmap:/root/.principalmap cnoio/wfuzz $@
+}
+
+alias docker-rm-all='docker rm $(docker ps -aq)'
+alias docker-stop-all='docker stop $(docker ps -q)'
+alias docker-force-rm-all='docker rm -f $(docker ps -aq)'
+alias docker-volume-rm-all='docker volume rm $(docker volume ls -q)'
+alias docker-shark='docker-stop-all; docker-rm-all; docker-volume-rm-all'
