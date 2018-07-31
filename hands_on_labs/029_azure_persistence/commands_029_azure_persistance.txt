@@ -1,0 +1,15 @@
+~~~ Use Minty ~~~
+
+docker run cnoio/mintyoffline -h
+
+docker run cnoio/mintyoffline mintyOffline.py rg001disks543 vhds rl 1 Fp8UbW1vikJnSYBHpTFqjUh2u8fP+qPqbhrQyBmHX2uhRiAqGoLDcNwiybwz5FRDx4l5M0J1VlGhZ2tje3IkRQ==
+
+~~~ Access Storage Container Resources ~~~
+
+mkdir /shared
+
+cd /shared
+
+docker run -v /shared:/shared --entrypoint /bin/bash -ti cnoio/azureclione
+
+azure storage blob list --container vhds --account-name "rg001disks543" --sas "sig=6Rf7bfZ%2FeeEYFz4Dt8tLcUZJRVUps3OPVNYfhXWjbig%3D&srt=co&ss=b&spr=https&sp=rl&sv=2016-05-31&se=2018-07-11T00%3A19%3A39Z&st=2018-07-10T23%3A14%3A39Z"

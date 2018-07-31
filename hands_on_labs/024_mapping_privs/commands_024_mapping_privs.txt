@@ -1,0 +1,27 @@
+~~~ Setup Profile ~~~
+
+apt install -y awscli # install AWS cli utility
+
+aws configure --profile pmapper001 # configure AWS cli profile
+
+cat ~/.aws/credentials
+
+~~~ Collecting and Graphing Data ~~~
+
+docker run -v /shared:/shared -v /root/.aws:/root/.aws -v /root/.principalmap:/root/.principalmap --entrypoint /bin/bash -ti cnoio/pmapper
+
+python pmapper.py --profile pmapper001 graph
+
+ls -alF ~/.principalmap
+
+~~~ Querying Data ~~~
+
+python pmapper.py --profile pmapper001 query "who can do s3:GetObject with *"
+
+python pmapper.py --profile pmapper001 query "preset priv_esc user/admin_user" # identify pric escalation paths
+
+python pmapper.py --profile pmapper001 visualize # visualize permissions
+
+ls -alF
+
+cp output.* /shared

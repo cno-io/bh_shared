@@ -1,0 +1,19 @@
+~~~ Install Gobuster ~~~
+
+mkdir /shared
+
+cd /shared
+
+wget https://raw.githubusercontent.com/cno-io/SecLists/master/Discovery/Web-Content/quickhits.txt
+
+cat /shared/quickhits.txt | cut -c 2- >> /shared/quickhits_noslash.txt
+
+docker run -v /shared:/shared cnoio/gobuster -t 100 -i -m dir -w /shared/quickhits_noslash.txt -u http://opback.com/ -o /shared/gobuster_found_folders.txt
+
+cat /shared/gobuster_found_folders.txt
+
+~~~ Check for additional resources ~~~
+
+docker run -v /shared:/shared cnoio/gobuster -t 100 -i -m dir -w /shared/quickhits_noslash.txt -u http://opback.com/test/ -o /shared/gobuster_found_files.txt
+
+cat /shared/gobuster_found_files.txt

