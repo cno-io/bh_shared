@@ -8,8 +8,22 @@ aws s3 --no-sign-request cp s3://cdn2.lizardblue.com/lizardssns.txt .
  
 cat lizardssns.txt
 
+mkdir -p /shared/s3/sync && cd /shared/s3/sync
+
+aws s3 --no-sign-request sync s3://cdn2.lizardblue.com .
+
+ls -alF
+
+cat .boto
+
+echo "hi" > test.txt
+
+aws s3 cp --no-sign-request test.txt s3://cdn2.lizardblue.com
+
 
 ~~~ Authenicated Access ~~~
+
+cd /shared
 
 aws configure
 ASI...X5A
@@ -27,8 +41,10 @@ nslookup soundslike.s3.amazonaws.com
 
 aws s3 ls --region=us-east-2 s3://cdn2.lizardblue.com
 
-root@ip-10-0-1-59:/shared# aws configure
+aws configure
 
 us-east-2
 
 aws s3 ls s3://soundslike
+
+https://buckets.grayhatwarfare.com/

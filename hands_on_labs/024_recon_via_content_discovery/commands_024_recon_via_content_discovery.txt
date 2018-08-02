@@ -1,0 +1,21 @@
+~~~ Install Gobuster ~~~
+
+cd /shared/lists
+
+wget https://raw.githubusercontent.com/cno-io/SecLists/master/Discovery/Web-Content/quickhits.txt
+
+cat /shared/quickhits.txt | cut -c 2- >> /shared/quickhits_noslash.txt
+
+cnoio_gobuster -t 100 -i -m dir -w /shared/lists/quickhits_noslash.txt -u http://opback.com/ -o /shared/gobuster_found_folders.txt
+ 
+cat /shared/gobuster_found_folders.txt
+
+curl http://opback.com/test/
+
+
+~~~ Check for additional resources ~~~
+
+cnoio_gobuster -t 100 -i -m dir -w /shared/lists/quickhits_noslash.txt -u http://opback.com/test/ -o /shared/gobuster_found_files.txt
+ 
+cat /shared/gobuster_found_files.txt
+

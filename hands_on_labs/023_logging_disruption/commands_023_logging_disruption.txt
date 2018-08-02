@@ -1,0 +1,92 @@
+~~~ Get Logging Settings ~~~
+
+aws cloudtrail describe-trails --region us-east-2 # get logging
+
+aws sts get-caller-identity
+
+watch -n 5 -d aws cloudtrail describe-trails --region us-east-2 # watch logs
+
+
+~~~ Stop Logging ~~~
+
+aws configure set region us-east-2 # set local profile to use us-east-2 region
+
+aws cloudtrail stop-logging --name "arn:aws:cloudtrail:us-east-2:480927147553:trail/awstrainingstack001-CloudTrail-PMHANDXV57UK" # turn off logging
+
+
+~~~ Re-enable Logging ~~~
+
+aws cloudtrail start-logging --name "arn:aws:cloudtrail:us-east-2:480927147553:trail/awstrainingstack001-CloudTrail-PMHANDXV57UK"
+
+
+~~~ Stop Multi Region Logging ~~~
+
+aws configure set region us-east-2
+
+aws cloudtrail update-trail --name "arn:aws:cloudtrail:us-east-2:480927147553:trail/awstrainingstack001-CloudTrail-PMHANDXV57UK" --no-is-multi-region-trail --no-include-global-service-events
+
+
+~~~ Evil Lambda Functions ~~~
+
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
+      "Resource": "arn:aws:logs:*:*:*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:PutObject",
+        "s3:DeleteObject",
+        "s3:DeleteObjectVersion"
+      ],
+      "Resource": [
+        "arn:aws:s3:::*"
+      ]
+    }
+  ]
+}
+
+https://gist.githubusercontent.com/cno-io/ee12f772ac33fa0a702ec1300d81a4d8/raw/5a6bb62f15b4970331ee35d99869395e23df2af3/lambda_log_sanitiser.py
+
+
+~~~ Enable Log File Validation ~~~
+
+aws cloudtrail describe-trails --region us-east-2
+
+aws cloudtrail update-trail --name "arn:aws:cloudtrail:us-east-2:480927147553:trail/awstrainingstack001-CloudTrail-2E08WXH1QLOQ" --enable-log-file-validation --region us-east-2
+
+aws cloudtrail describe-trails --region us-east-2
+
+
+~~~ Validate Logs ~~~
+
+aws cloudtrail validate-logs --trail-arn "arn:aws:cloudtrail:us-east-2:480927147553:trail/awstrainingstack001-CloudTrail-2E08WXH1QLOQ" --start-time 2018-01-01T12:31:41Z --region us-east-2
+
+curl ipcurl.net/n # get our IP
+
+watch -n 5 -d aws cloudtrail describe-trails --region us-east-2
+
+
+~~~ Disable Log File Verification ~~~
+
+aws cloudtrail update-trail --name "arn:aws:cloudtrail:us-east-2:480927147553:trail/awstrainingstack001-CloudTrail-2E08WXH1QLOQ" --no-enable-log-file-validation --region us-east-2
+
+aws cloudtrail describe-trails --region us-east-2
+
+aws cloudtrail update-trail --name "arn:aws:cloudtrail:us-east-2:480927147553:trail/awstrainingstack001-CloudTrail-2E08WXH1QLOQ" --enable-log-file-validation --region us-east-2
+
+aws cloudtrail describe-trails --region us-east-2
+
+aws cloudtrail describe-trails --region us-east-2
+
+aws cloudtrail validate-logs --trail-arn "arn:aws:cloudtrail:us-east-2:480927147553:trail/awstrainingstack001-CloudTrail-2E08WXH1QLOQ" --start-time 2018-01-01T12:31:41Z --region us-east-2
+

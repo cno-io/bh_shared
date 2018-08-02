@@ -1,0 +1,4 @@
+
+cd /shared
+
+aws sns publish --topic-arn arn:aws:sns:us-east-1:480927147553:nmap --region us-east-1 --message 18.222.129.248

@@ -1,5 +1,7 @@
 ~~~ Discover via OSINT ~~~
 
+cd /shared/
+
 cnoio_amass -d lizardblue.com
 
 cnoio_amass -v -ip -d lizardblue.com

