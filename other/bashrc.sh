@@ -51,6 +51,10 @@ function cnoio_wfuzz() {
     docker run -v /shared:/shared -v /root/.aws:/root/.aws -v /root/.principalmap:/root/.principalmap cnoio/wfuzz $@
 }
 
+function cnoio_pacu() {
+    docker run -v /shared:/shared -v /root/.aws:/root/.aws -v /root/.principalmap:/root/.principalmap -ti cnoio/pacu
+}
+
 alias docker-rm-all='docker rm $(docker ps -aq)'
 alias docker-stop-all='docker stop $(docker ps -q)'
 alias docker-force-rm-all='docker rm -f $(docker ps -aq)'
