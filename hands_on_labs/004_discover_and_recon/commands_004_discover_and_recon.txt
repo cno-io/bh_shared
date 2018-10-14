@@ -38,7 +38,7 @@ cat /shared/results_subdomains_gobuster.txt
 
 cd /shared/spider/
 
-wget -r --span-hosts --spider -D lizardblue.com -o /shared/spider/spider.log http://lizardblue.com
+wget -r --span-hosts --spider -D lizardblue.com -o /shared/spider/spider.log https://www.lizardblue.com
 
 ls -alF /shared/spider/
 
