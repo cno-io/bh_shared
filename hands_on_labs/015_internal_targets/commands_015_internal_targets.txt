@@ -2,11 +2,11 @@
 
 nmap -Pn -n --reason --open -p 22 10.0.2.0/24 # Network scan
 
-nmap -Pn -n --reason 10.0.2.36 # Host scan
+nmap -Pn -n --reason 10.0.2.ip # Host scan
 
-nmap -Pn -n --reason -A -p 8080 10.0.2.36 # Identify services
+nmap -Pn -n --reason -A -p 8080 10.0.2.ip # Identify services
 
-curl http://10.0.2.36:8080
+curl http://10.0.2.ip:8080
 
 
 ~~~ FoxyProxy ~~~
