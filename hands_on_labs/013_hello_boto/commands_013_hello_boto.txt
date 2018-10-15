@@ -1,6 +1,6 @@
 import boto3 # import the boto3 library
 
-session = boto3.Session(profile_name='lambdavuln')
+session = boto3.Session(profile_name='vulnlambda')
 
 ec2 = session.client("ec2",)
 
@@ -14,7 +14,7 @@ for r in regions:
 ~~~ 001_enumerate_regions.py ~~~
 
 import boto3
-session = boto3.Session(profile_name='lambdavuln')
+session = boto3.Session(profile_name='vulnlambda')
 ec2 = session.client("ec2",)
 regions = ec2.describe_regions()
 regions = [r['RegionName'] for r in regions['Regions']]
@@ -38,7 +38,7 @@ for p in params['Parameters']:
 ~~~ 002_enumerate_ssm_in_a_region.py ~~~
 
 import boto3
-session = boto3.Session(profile_name='lambdavuln')
+session = boto3.Session(profile_name='vulnlambda')
 ssmClient = session.client("ssm", 'us-east-1')
 params = ssmClient.describe_parameters()
 for p in params['Parameters']:
@@ -54,7 +54,7 @@ for p in params['Parameters']:
 ~~~ 003_enumerate_ssm_in_each_region.py ~~~
 
 import boto3
-session = boto3.Session(profile_name='lambdavuln')
+session = boto3.Session(profile_name='vulnlambda')
 ec2 = session.client("ec2",)
 regions = ec2.describe_regions()
 regions = [r['RegionName'] for r in regions['Regions']]
