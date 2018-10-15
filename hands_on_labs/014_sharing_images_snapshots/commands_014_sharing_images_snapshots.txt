@@ -10,7 +10,7 @@ vi ~/.aws/config
 
 vi ~/.aws/credentials # setup your AWS profile
 
-aws ec2 describe-instances --region us-east-2 >> ec2_dump.txt # get potential targets
+aws --profile vulnlambda ec2 describe-instances --region us-east-2 >> ec2_dump.txt # get potential targets
 
 vi ec2_dump.txt
 
