@@ -10,7 +10,7 @@ cnoio_amass -v -ip -brute -w /shared/lists/namelist.txt -min-for-recursive 3 -d 
 
 cnoio_amass -o /shared/results_subdomains_amass.txt -d lizardblue.com
 
-cat /shared/results_subdomains_amass.txt.txt
+cat /shared/results_subdomains_amass.txt
 
 
 ~~~ Recon via DNS Bruteforce ~~~
