@@ -1,5 +1,5 @@
 import boto3
-session = boto3.Session(profile_name='lambdavuln')
+session = boto3.Session(profile_name='vulnlambda')
 ssmClient = session.client("ssm", 'us-east-1')
 params = ssmClient.describe_parameters()
 for p in params['Parameters']:
