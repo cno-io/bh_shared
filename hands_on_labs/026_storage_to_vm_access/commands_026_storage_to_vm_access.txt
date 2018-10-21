@@ -8,7 +8,7 @@ cd /shared
 
 export AZURE_STORAGE_ACCOUNT=rg001disks543
 
-export AZURE_STORAGE_ACCESS_KEY=Fp8UbW1vikJnSYBHpTFqjUh2u8fP+qPqbhrQyBmHX2uhRiAqGoLDcNwiybwz5FRDx4l5M0J1VlGhZ2tje3IkRQ==
+export AZURE_STORAGE_ACCESS_KEY=Fp8U...RQ==
 
 azure storage container list
 
