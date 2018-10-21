@@ -20,7 +20,7 @@ function cnoio_pyinstaller() {
 }
 
 function cnoio_azureclione() {
-    docker run -v /shared:/shared -v /root/.aws:/root/.aws -v /root/.principalmap:/root/.principalmap cnoio/azureclione $@
+    docker run -v /shared:/shared --entrypoint /bin/bash -ti cnoio/azureclione
 }
 
 function cnoio_weirdaal() {
