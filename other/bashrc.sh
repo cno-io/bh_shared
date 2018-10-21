@@ -32,7 +32,7 @@ function cnoio_mintyoffline() {
 }
 
 function cnoio_pmapper() {
-    docker run -v /shared:/shared -v /root/.aws:/root/.aws -v /root/.principalmap:/root/.principalmap cnoio/pmapper $@
+    docker run -v /shared:/shared -v /root/.aws:/root/.aws -v /root/.principalmap:/root/.principalmap --entrypoint /bin/bash -ti cnoio/pmapper
 }
 
 function cnoio_cosmik() {
