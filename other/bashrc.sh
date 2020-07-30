@@ -59,6 +59,10 @@ function cnoio_gcpsagetatoken() {
     docker run -v /shared:/shared -ti cnoio/gcpsagetatoken
 }
 
+function cnoio_evalshell() {
+    docker run -v /shared:/shared -ti cnoio/evalshell
+}
+
 function cnoio_voodooce() {
     docker run -ti -p 443:443 -p 995:995 -p 123:123/udp -v /shared:/shared cnoio/voodoo_ce
 }

