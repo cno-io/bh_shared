@@ -59,6 +59,14 @@ function cnoio_gcpsagetatoken() {
     docker run -v /shared:/shared -ti cnoio/gcpsagetatoken
 }
 
+function cnoio_voodooce() {
+    docker run -ti -p 443:443 -p 995:995 -p 123:123/udp -v /shared:/shared cnoio/voodoo_ce
+}
+
+function cnoio_voodooce2020() {
+    docker run -ti -p 443:443 -p 995:995 -p 123:123/udp -v /shared:/shared cnoio/voodooce2020
+}
+
 alias docker-rm-all='docker rm $(docker ps -aq)'
 alias docker-stop-all='docker stop $(docker ps -q)'
 alias docker-force-rm-all='docker rm -f $(docker ps -aq)'
