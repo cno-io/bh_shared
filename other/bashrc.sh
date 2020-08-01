@@ -56,11 +56,15 @@ function cnoio_pacu() {
 }
 
 function cnoio_gcpsagetatoken() {
-    docker run -v /shared:/shared -ti cnoio/gcpsagetatoken
+    docker run -v /shared:/shared -ti cnoio/gcpsagetatoken $@
 }
 
 function cnoio_evalshell() {
-    docker run -v /shared:/shared -ti cnoio/evalshell
+    docker run -v /shared:/shared -ti cnoio/evalshell $@
+}
+
+function cnoio_o365creeper() {
+    docker run -v /shared:/shared -ti cnoio/o365creeper $@
 }
 
 function cnoio_voodooce() {
