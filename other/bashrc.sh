@@ -75,6 +75,10 @@ function cnoio_voodooce2020() {
     docker run -ti -p 443:443 -p 995:995 -p 123:123/udp -v /shared:/shared cnoio/voodooce2020
 }
 
+function cnoio_sam() {
+    docker run -v /shared:/shared -v /root/.aws:/root/.aws cnoio/sam $@
+}
+
 alias docker-rm-all='docker rm $(docker ps -aq)'
 alias docker-stop-all='docker stop $(docker ps -q)'
 alias docker-force-rm-all='docker rm -f $(docker ps -aq)'
