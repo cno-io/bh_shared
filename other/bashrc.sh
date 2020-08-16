@@ -76,7 +76,7 @@ function cnoio_voodooce2020() {
 }
 
 function cnoio_sam() {
-    docker run -v /shared:/shared -v /root/.aws:/root/.aws cnoio/sam $@
+    docker run -v /shared:/shared -v /root/.aws:/root/.aws --entrypoint /bin/bash -ti cnoio/sam
 }
 
 alias docker-rm-all='docker rm $(docker ps -aq)'
