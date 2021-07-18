@@ -79,6 +79,23 @@ function cnoio_sam() {
     docker run -v /shared:/shared -v /root/.aws:/root/.aws --entrypoint /bin/bash -ti cnoio/sam
 }
 
+function cnoio_impacket() {
+    docker run -v /shared:/shared -v /root/.aws:/root/.aws -ti cnoio/impacket
+}
+
+function cnoio_mailsniper() {
+    docker run -v /shared:/shared -v /root/.aws:/root/.aws -ti cnoio/mailsniper $@
+}
+
+function cnoio_o365creeper() {
+    docker run -v /shared:/shared -v /root/.aws:/root/.aws -ti cnoio/o365creeper $@
+}
+
+function cnoio_roadrecon() {
+    docker run -v /shared:/shared -p 5000:5000 -v /root/.aws:/root/.aws -ti cnoio/roadrecon $@
+}
+
+
 alias docker-rm-all='docker rm $(docker ps -aq)'
 alias docker-stop-all='docker stop $(docker ps -q)'
 alias docker-force-rm-all='docker rm -f $(docker ps -aq)'
