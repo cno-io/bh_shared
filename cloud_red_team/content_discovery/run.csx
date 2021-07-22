@@ -18,7 +18,7 @@ public static async Task<IActionResult> Run(HttpRequest req, ILogger log)
     // ### User Set Variables ###
     string urlToTest = "http://opback.com/";
     string wordlistToTest = "quickhits_noslash_short.txt";
-    string nameOfThisAzureFunction = "HttpTrigger010";
+    string nameOfThisAzureFunction = "ContentDiscovery1";
     // ### Setup Var to Return From API ###
     var apiReturnString = string.Empty;
     apiReturnString = apiReturnString + System.Environment.NewLine;
