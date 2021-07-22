@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json;
 
+private static readonly HttpClient client = new HttpClient();
+
 public static async Task<IActionResult> Run(HttpRequest req, ILogger log)
 {
     log.LogInformation("C# HTTP trigger function processed a request.");
@@ -47,7 +49,6 @@ public static async Task<IActionResult> Run(HttpRequest req, ILogger log)
         }
     }
     // ### ### ###
-
     string responseMessage = string.IsNullOrEmpty(name)
         ? "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response." + apiReturnString
                 : $"Hello, {name}. This HTTP triggered function executed successfully.";
