@@ -103,6 +103,27 @@ function cnoio_stormspotter-client() {
     docker run -v /shared:/shared -ti cnoio/stormspotter-client
 }
 
+function cnoio_stormspotter() {
+    if [ -f /usr/local/bin/docker-compose ]
+    then
+        echo "Found docker-compose"
+    else
+        curl -L "https://github.com/docker/compose/releases/download/1.25.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+        chmod +x /usr/local/bin/docker-compose
+        ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+    fi
+    if [ -d "/shared/Stormspotter" ]
+    then
+        echo "Starting Stormspotter"
+    else
+        cd /shared
+        git clone https://github.com/anthonyhendricksS2/Stormspotter.git
+        cd /shared/Stormspotter
+    fi
+
+    cd /shared/Stormspotter &&	docker-compose up
+}
+
 alias docker-rm-all='docker rm $(docker ps -aq)'
 alias docker-stop-all='docker stop $(docker ps -q)'
 alias docker-force-rm-all='docker rm -f $(docker ps -aq)'
