@@ -68,6 +68,10 @@ function cnoio_o365creeper() {
 }
 
 function cnoio_voodooce() {
+    docker run -ti -p 443:443 -p 995:995 -p 123:123/udp -v /shared:/shared -v /shared/voodoo_ce:/app/voodoo-ce cnoio/voodoo_ce
+}
+
+function cnoio_backup_voodooce() {
     docker run -ti -p 443:443 -p 995:995 -p 123:123/udp -v /shared:/shared cnoio/voodoo_ce
 }
 
