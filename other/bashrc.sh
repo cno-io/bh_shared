@@ -95,6 +95,9 @@ function cnoio_roadrecon() {
     docker run -v /shared:/shared -p 5000:5000 -v /root/.aws:/root/.aws -ti cnoio/roadrecon $@
 }
 
+function cnoio_stormspotter-client() {
+    docker run -v /shared:/shared -ti cnoio/stormspotter-client
+}
 
 alias docker-rm-all='docker rm $(docker ps -aq)'
 alias docker-stop-all='docker stop $(docker ps -q)'
