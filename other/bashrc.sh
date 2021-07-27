@@ -59,6 +59,10 @@ function cnoio_gcpsagetatoken() {
     docker run -v /shared:/shared -ti cnoio/gcpsagetatoken $@
 }
 
+function cnoio_scoutsuite() {
+    docker run -it -v /root/.config/:/root/.config/ -v /shared/scoutsuite-report/:/root/scoutsuite-report/ -v /shared/:/shared/ cnoio/scoutsuite
+}
+
 function cnoio_evalshell() {
     docker run -v /shared:/shared -ti cnoio/evalshell $@
 }
@@ -75,7 +79,7 @@ function cnoio_backup_voodooce() {
     docker run -ti -p 443:443 -p 995:995 -p 123:123/udp -v /shared:/shared cnoio/voodoo_ce
 }
 
-function cnoio_voodooce2020() {
+function cnoio_backup_voodooce2020() {
     docker run -ti -p 443:443 -p 995:995 -p 123:123/udp -v /shared:/shared cnoio/voodooce2020
 }
 
@@ -89,10 +93,6 @@ function cnoio_impacket() {
 
 function cnoio_mailsniper() {
     docker run -v /shared:/shared -v /root/.aws:/root/.aws -ti cnoio/mailsniper $@
-}
-
-function cnoio_o365creeper() {
-    docker run -v /shared:/shared -v /root/.aws:/root/.aws -ti cnoio/o365creeper $@
 }
 
 function cnoio_roadrecon() {
