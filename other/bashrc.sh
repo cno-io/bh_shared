@@ -64,7 +64,7 @@ function cnoio_gcpsagetatoken() {
 }
 
 function cnoio_scoutsuite() {
-    docker run -it -v /root/.config/:/root/.config/ -v /shared/scoutsuite-report/:/root/scoutsuite-report/ -v /shared/:/shared/ cnoio/scoutsuite
+    docker run -it -v /root/.config/:/root/.config/ -v /root/.azure:/root/.azure -v /root/.aws:/root/.aws -v /shared/scoutsuite-report/:/root/scoutsuite-report/ -v /shared/:/shared/ cnoio/scoutsuite
 }
 
 function cnoio_evalshell() {
