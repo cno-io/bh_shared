@@ -59,6 +59,10 @@ function cnoio_gcpsagetatoken() {
     docker run -v /shared:/shared -ti cnoio/gcpsagetatoken $@
 }
 
+function cnoio_cloudenum() {
+    docker run -it -v /root/.config/:/root/.config/ -v /shared/:/shared/ cnoio/cloud_enum $@
+}
+
 function cnoio_gcpbucketbrute() {
     docker run -it -v /root/.config/:/root/.config/ -v /shared/:/shared/ cnoio/gcpbucketbrute $@
 }
