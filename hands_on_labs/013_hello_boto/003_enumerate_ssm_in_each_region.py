@@ -4,6 +4,7 @@ ec2 = session.client("ec2", "us-east-1")
 regions = ec2.describe_regions()
 regions = [r['RegionName'] for r in regions['Regions']]
 for r in regions:
+    print("Region: " + r)
     ssmClient = session.client("ssm", r)
     params = ssmClient.describe_parameters()
     for p in params['Parameters']:
@@ -11,4 +12,4 @@ for r in regions:
         response = ssmClient.get_parameter(
             Name=p_name)
         val = response['Parameter']['Value']
-        print "%s - %s" % (p_name, val)
+        print(str(p_name) + " - " + str(val))
