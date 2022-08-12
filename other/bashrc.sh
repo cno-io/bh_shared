@@ -1,114 +1,114 @@
 
 function cnoio_amass() {
-    docker run -v /shared:/shared -v /root/.aws:/root/.aws -v /root/.principalmap:/root/.principalmap cnoio/amass $@
+    docker run --hostname cnoio_amass -v /shared:/shared -v /root/.aws:/root/.aws -v /root/.principalmap:/root/.principalmap cnoio/amass $@
 }
 
 function cnoio_gobuster() {
-    docker run -v /shared:/shared -v /root/.aws:/root/.aws -v /root/.principalmap:/root/.principalmap cnoio/gobuster $@
+    docker run --hostname cnoio_gobuster -v /shared:/shared -v /root/.aws:/root/.aws -v /root/.principalmap:/root/.principalmap cnoio/gobuster $@
 }
 
 function cnoio_nimbusland() {
-    docker run -v /shared:/shared -v /root/.aws:/root/.aws -v /root/.principalmap:/root/.principalmap cnoio/nimbusland $@
+    docker run --hostname cnoio_nimbusland -v /shared:/shared -v /root/.aws:/root/.aws -v /root/.principalmap:/root/.principalmap cnoio/nimbusland $@
 }
 
 function cnoio_subjack() {
-    docker run -v /shared:/shared -v /root/.aws:/root/.aws -v /root/.principalmap:/root/.principalmap cnoio/subjack $@
+    docker run --hostname cnoio_subjack -v /shared:/shared -v /root/.aws:/root/.aws -v /root/.principalmap:/root/.principalmap cnoio/subjack $@
 }
 
 function cnoio_pyinstaller() {
-    docker run -v /shared:/shared -v /root/.aws:/root/.aws -v /root/.principalmap:/root/.principalmap cnoio/pyinstaller $@
+    docker run --hostname cnoio_pyinstaller -v /shared:/shared -v /root/.aws:/root/.aws -v /root/.principalmap:/root/.principalmap cnoio/pyinstaller $@
 }
 
 function cnoio_azureclione() {
-    docker run -v /shared:/shared --entrypoint /bin/bash -ti cnoio/azureclione
+    docker run --hostname cnoio_azureclione -v /shared:/shared --entrypoint /bin/bash -ti cnoio/azureclione
 }
 
 function cnoio_weirdaal() {
-    docker run -v /shared:/shared -v /root/.aws:/root/.aws -v /root/.principalmap:/root/.principalmap cnoio/weirdaal $@
+    docker run --hostname cnoio_weirdaal -v /shared:/shared -v /root/.aws:/root/.aws -v /root/.principalmap:/root/.principalmap cnoio/weirdaal $@
 }
 
 function cnoio_mintyoffline() {
-    docker run -v /shared:/shared -v /root/.aws:/root/.aws -v /root/.principalmap:/root/.principalmap cnoio/mintyoffline $@
+    docker run --hostname cnoio_mintyoffline -v /shared:/shared -v /root/.aws:/root/.aws -v /root/.principalmap:/root/.principalmap cnoio/mintyoffline $@
 }
 
 function cnoio_pmapper() {
-    docker run -v /shared:/shared -v /root/.aws:/root/.aws -v /root/.principalmap:/root/.principalmap --entrypoint /bin/bash -ti cnoio/pmapper
+    docker run --hostname cnoio_pmapper -v /shared:/shared -v /root/.aws:/root/.aws -v /root/.principalmap:/root/.principalmap --entrypoint /bin/bash -ti cnoio/pmapper
 }
 
 function cnoio_cosmik() {
-    docker run -v /shared:/shared -v /root/.aws:/root/.aws -v /root/.principalmap:/root/.principalmap cnoio/cosmik $@
+    docker run --hostname cnoio_cosmik -v /shared:/shared -v /root/.aws:/root/.aws -v /root/.principalmap:/root/.principalmap cnoio/cosmik $@
 }
 
 function cnoio_lolurslove() {
-    docker run -v /shared:/shared -v /root/.aws:/root/.aws -v /root/.principalmap:/root/.principalmap cnoio/lolurslove $@
+    docker run --hostname cnoio_lolurslove -v /shared:/shared -v /root/.aws:/root/.aws -v /root/.principalmap:/root/.principalmap cnoio/lolurslove $@
 }
 
 function cnoio_aws_inventory() {
-    docker run -v /shared:/shared -v /root/.aws:/root/.aws -v /root/.principalmap:/root/.principalmap cnoio/aws_inventory $@
+    docker run --hostname cnoio_aws_inventory -v /shared:/shared -v /root/.aws:/root/.aws -v /root/.principalmap:/root/.principalmap cnoio/aws_inventory $@
 }
 
 function cnoio_wfuzz() {
-    docker run -v /shared:/shared -v /root/.aws:/root/.aws -v /root/.principalmap:/root/.principalmap cnoio/wfuzz $@
+    docker run --hostname cnoio_wfuzz -v /shared:/shared -v /root/.aws:/root/.aws -v /root/.principalmap:/root/.principalmap cnoio/wfuzz $@
 }
 
 function cnoio_pacu() {
-    docker run -v /shared:/shared -v /root/.aws:/root/.aws -v /root/.principalmap:/root/.principalmap -ti cnoio/pacu
+    docker run --hostname cnoio_pacu -v /shared:/shared -v /root/.aws:/root/.aws -v /root/.principalmap:/root/.principalmap -ti cnoio/pacu
 }
 
 function cnoio_gcpsagetatoken() {
-    docker run -v /shared:/shared -ti cnoio/gcpsagetatoken $@
+    docker run --hostname cnoio_gcpsagetatoken -v /shared:/shared -ti cnoio/gcpsagetatoken $@
 }
 
 function cnoio_cloudenum() {
-    docker run -it -v /root/.config/:/root/.config/ -v /shared/:/shared/ cnoio/cloud_enum $@
+    docker run -it --hostname cnoio_cloudenum -v /root/.config/:/root/.config/ -v /shared/:/shared/ cnoio/cloud_enum $@
 }
 
 function cnoio_gcpbucketbrute() {
-    docker run -it -v /root/.config/:/root/.config/ -v /shared/:/shared/ cnoio/gcpbucketbrute $@
+    docker run -it --hostname cnoio_gcpbucketbrute -v /root/.config/:/root/.config/ -v /shared/:/shared/ cnoio/gcpbucketbrute $@
 }
 
 function cnoio_scoutsuite() {
-    docker run -it -v /root/.config/:/root/.config/ -v /root/.azure:/root/.azure -v /root/.aws:/root/.aws -v /shared/scoutsuite-report/:/root/scoutsuite-report/ -v /shared/:/shared/ cnoio/scoutsuite
+    docker run -it --hostname cnoio_scoutsuite -v /root/.config/:/root/.config/ -v /root/.azure:/root/.azure -v /root/.aws:/root/.aws -v /shared/scoutsuite-report/:/root/scoutsuite-report/ -v /shared/:/shared/ cnoio/scoutsuite
 }
 
 function cnoio_evalshell() {
-    docker run -v /shared:/shared -ti cnoio/evalshell $@
+    docker run --hostname cnoio_evalshell -v /shared:/shared -ti cnoio/evalshell $@
 }
 
 function cnoio_o365creeper() {
-    docker run -v /shared:/shared -ti cnoio/o365creeper $@
+    docker run --hostname cnoio_o365creeper -v /shared:/shared -ti cnoio/o365creeper $@
 }
 
 function cnoio_voodooce() {
-    docker run -ti -p 443:443 -p 995:995 -p 123:123/udp -v /shared:/shared -v /shared/voodoo_ce:/app/voodoo-ce cnoio/voodoo_ce
+    docker run -ti --hostname cnoio_voodooce -p 443:443 -p 995:995 -p 123:123/udp -v /shared:/shared -v /shared/voodoo_ce:/app/voodoo-ce cnoio/voodoo_ce
 }
 
 function cnoio_backup_voodooce() {
-    docker run -ti -p 443:443 -p 995:995 -p 123:123/udp -v /shared:/shared cnoio/voodoo_ce
+    docker run -ti --hostname cnoio_backup_voodooce -p 443:443 -p 995:995 -p 123:123/udp -v /shared:/shared cnoio/voodoo_ce
 }
 
 function cnoio_backup_voodooce2020() {
-    docker run -ti -p 443:443 -p 995:995 -p 123:123/udp -v /shared:/shared cnoio/voodooce2020
+    docker run -ti --hostname cnoio_voodooce2020 -p 443:443 -p 995:995 -p 123:123/udp -v /shared:/shared cnoio/voodooce2020
 }
 
 function cnoio_sam() {
-    docker run -v /shared:/shared -v /root/.aws:/root/.aws --entrypoint /bin/bash -ti cnoio/sam
+    docker run --hostname cnoio_sam -v /shared:/shared -v /root/.aws:/root/.aws --entrypoint /bin/bash -ti cnoio/sam
 }
 
 function cnoio_impacket() {
-    docker run -v /shared:/shared -v /root/.aws:/root/.aws -ti cnoio/impacket
+    docker run --hostname cnoio_impacket -v /shared:/shared -v /root/.aws:/root/.aws -ti cnoio/impacket
 }
 
 function cnoio_mailsniper() {
-    docker run -v /shared:/shared -v /root/.aws:/root/.aws -ti cnoio/mailsniper $@
+    docker run --hostname cnoio_mailsniper -v /shared:/shared -v /root/.aws:/root/.aws -ti cnoio/mailsniper $@
 }
 
 function cnoio_roadrecon() {
-    docker run -v /shared:/shared -p 5000:5000 -v /root/.aws:/root/.aws -ti cnoio/roadrecon $@
+    docker run --hostname cnoio_roadrecon -v /shared:/shared -p 5000:5000 -v /root/.aws:/root/.aws -ti cnoio/roadrecon $@
 }
 
 function cnoio_stormspotter-client() {
-    docker run -v /shared:/shared -ti cnoio/stormspotter-client
+    docker run --hostname cnoio_stormspotter-client -v /shared:/shared -ti cnoio/stormspotter-client
 }
 
 function cnoio_stormspotter() {
